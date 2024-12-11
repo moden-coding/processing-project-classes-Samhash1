@@ -12,12 +12,23 @@ public class App extends PApplet{
     public static void main(String[] args)  {
         PApplet.main("App");
     }
+        ArrayList<Invador> otherside = new ArrayList<>();
+
+        public void enemy(){
+            for(int Y = 5; Y <= 195; Y += 65){
+                for ( int X =5; X <=195; X += 65){
+                    otherside.add(new Invador (X, Y, this));
+                }
+            }
+        }
+
+      
 
     public void setup(){
         first = new Spaceship(100 , 675, 130,  this);
         missles = new ArrayList<>();
         third = new Invador(100, 20, this);
-        enemy = new ArrayList<>();
+        // enemy = new ArrayList<>();
     }
 
     public void settings(){
@@ -29,13 +40,16 @@ public class App extends PApplet{
         first.display();
         first.update();
         third.display();
+        for (Invador One: otherside){
+            One.display();
+        }
        
        
         for (int i = 0; i < missles.size(); i++) {
             Bullet second = missles.get(i);
             second.display(); 
             second.move();    
-           
+            
             if (second.getY() < -45) {
                 missles.remove(i);
                 i--; 
