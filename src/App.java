@@ -14,9 +14,12 @@ public class App extends PApplet{
     }
         ArrayList<Invador> otherside = new ArrayList<>();
 
-        public void enemy(){
+        public void Createenemy(){
             for(int Y = 5; Y <= 195; Y += 65){
-                for ( int X =5; X <=195; X += 65){
+                for ( int X = 100; X <=1400; X +=80 ){
+                    if(X >= 1300) {
+                        break;
+                    }
                     otherside.add(new Invador (X, Y, this));
                 }
             }
@@ -28,7 +31,7 @@ public class App extends PApplet{
         first = new Spaceship(100 , 675, 130,  this);
         missles = new ArrayList<>();
         third = new Invador(100, 20, this);
-        // enemy = new ArrayList<>();
+        Createenemy();
     }
 
     public void settings(){
@@ -39,9 +42,18 @@ public class App extends PApplet{
        background(0,0,0);
         first.display();
         first.update();
-        third.display();
-        for (Invador One: otherside){
+
+        // if(third.checktouch(second)){
+        //     System.out.println("touching bullet");
+        // }
+      
+        for (int i=0; i < enemy.size(); i++){ //  Invador One: otherside
+            Invador One=enemy.get(i);
             One.display();
+
+           if (second != null && One.checktouch(second)){
+              enemy.remove(One);
+           }
         }
        
        
@@ -65,7 +77,7 @@ public class App extends PApplet{
             first.moveRight();
         }
         if (key == ' '){
-            Bullet second = new Bullet( first.shipgetx() - 3, 645, this);
+             second = new Bullet( first.shipgetx() - 3, 645, this);
             missles.add(second);
         }
     }
