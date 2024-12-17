@@ -6,12 +6,11 @@ import processing.core.*;
 
 public class App extends PApplet {
     Spaceship first;
-    Bullet second;
     ArrayList<Bullet> missles;
-    Invador third;
     int highscore;
     // ArrayList<Invador> enemy;
     ArrayList<Invador> otherside = new ArrayList<>();
+    double timer;
 
     public static void main(String[] args) {
         PApplet.main("App");
@@ -31,7 +30,7 @@ public class App extends PApplet {
     public void setup() {
         first = new Spaceship(100, 675, 130, this);
         missles = new ArrayList<>();
-        third = new Invador(100, 20, this);
+        // third = new Invador(100, 20, this);
         Createenemy();
         ReadHighScore();
 
@@ -44,7 +43,7 @@ public class App extends PApplet {
             // we read one line
             String row = scanner.nextLine();
             // we print the line that we read
-           highscore=Double.valueOf(row);
+           highscore=Integer.valueOf(row);
         }
     } catch (Exception e) {
         System.out.println("Error: " + e.getMessage());
@@ -60,13 +59,16 @@ public class App extends PApplet {
         background(0, 0, 0);
         first.display();
         first.update();
-
-        if (third.checktouch(second)) {
-            System.out.println("touching bullet");
-        }
-        for (Bullet b : missles) {
-            for (Invador enemy : otherside) {
-                if (b.touches(enemy)) {
+        timer= millis();
+        fill(255);
+        textSize(50);
+        text( ""+ timer, width -150, 780 );
+        
+        for ( int bIndex =0; bIndex < missles.size(); bIndex++) {
+            Bullet b = missles.get(bIndex);
+            for (int i =0; i < otherside.size(); i ++) {
+               Invador enemy = otherside.get(i);
+                if (enemy.checktouch(b)) {
                     missles.remove(b);
                     otherside.remove(enemy);
                 }
@@ -76,10 +78,10 @@ public class App extends PApplet {
             Invador One = otherside.get(i);
             One.display();
 
-            if (second != null && One.checktouch(second)) {
-                otherside.remove(One);
+            // if (second != null && One.checktouch(second)) {
+            //     otherside.remove(One);
 
-            }
+            // }
         }
 
         for (int i = 0; i < missles.size(); i++) {
@@ -102,8 +104,8 @@ public class App extends PApplet {
             first.moveRight();
         }
         if (key == ' ') {
-            second = new Bullet(first.shipgetx() - 3, 645, this);
-            missles.add(second);
+            Bullet temp = new Bullet(first.shipgetx() - 3, 645, this);
+            missles.add(temp);
         }
     }
 
