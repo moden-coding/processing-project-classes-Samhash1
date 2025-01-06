@@ -130,7 +130,7 @@ public class App extends PApplet {
                 shouldReverse = true;  // Reverse direction when an invader hits the screen edges
             }
         }
-        if (shouldReverse ) { // * 
+        if (shouldReverse ) { // (Chat GPT) 
             direction *= -1;  // Reverse the invaders direction
         }
        // Display and move bullets
@@ -175,7 +175,6 @@ public class App extends PApplet {
     }
    // Display the endgame screen method
     public void endgame() {
-
         background(0, 0, 255); // Blue background
         textSize(50);
         fill(0, 255, 0); // Green text
