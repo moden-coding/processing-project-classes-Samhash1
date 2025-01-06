@@ -180,8 +180,9 @@ public class App extends PApplet {
         textSize(50);
         fill(0, 255, 0); // Green text
         text("Time: " + timer, 450, 250); // Display the game time
-        text(" Hit Space to play again!", 450, 300); // Instructions
-        text("Lowest time: " + highscore, 450, 350); // Time record using file reading
+        text("Lowest time: " + highscore, 450, 300); // Time record using file reading
+        text(" Hit Space to play again!", 450, 350); // Instructions
+      
 
     }
     // Restart the game function to help game go back to old state(exept for score)
